@@ -3,12 +3,12 @@ import { getFirestore, collection, addDoc, onSnapshot, updateDoc, doc } from "ht
 
 // এখানে আপনার সেই ৫-৬ লাইনের Config কোডটি বসাবেন
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyBntmghsgXmWa_dCP9-T59Q_6qt8pbxJRI",
+  authDomain: "my-premium-shop.firebaseapp.com",
+  projectId: "my-premium-shop",
+  storageBucket: "my-premium-shop.firebasestorage.app",
+  messagingSenderId: "710447563935",
+  appId: "1:710447563935:web:cf5cafffa8cc2e211c0eaa"
 };
 
 const app = initializeApp(firebaseConfig);
