@@ -3,89 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure Admin Panel | Shovo's Shop</title>
+    <title>Master Admin | MY SHOP Panel</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { background: #0f172a; color: white; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; font-family: 'Inter', sans-serif; }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+        body { background: #080a11; color: #e2e8f0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-panel { background: rgba(17, 24, 39, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 24px; }
+        .sidebar { background: #0f172a; border-right: 1px solid rgba(255, 255, 255, 0.05); }
+        .input-field { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 12px; width: 100%; color: white; outline: none; transition: 0.3s; }
+        .input-field:focus { border-color: #3b82f6; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2); }
+        .action-btn { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); transition: 0.3s; }
+        .action-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4); }
         .hidden { display: none !important; }
-        input { transition: all 0.3s; }
-        input:focus { border-color: #3b82f6; box-shadow: 0 0 10px rgba(59, 130, 246, 0.5); }
     </style>
 </head>
-<body>
+<body class="flex min-h-screen">
 
-    <div id="login-box" class="glass p-10 rounded-3xl shadow-2xl w-full max-w-sm text-center">
-        <div class="mb-6">
-            <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-blue-500/50">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
+    <div id="login-box" class="w-full flex items-center justify-center p-6">
+        <div class="glass-panel p-10 w-full max-w-md text-center border-t-4 border-blue-500">
+            <div class="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6 text-blue-500 text-2xl">
+                <i class="fa fa-shield-halved"></i>
             </div>
-            <h2 class="text-3xl font-extrabold text-white">Admin Access</h2>
-            <p class="text-gray-400 mt-2">Enter your secret password</p>
+            <h2 class="text-2xl font-bold mb-2">Admin Portal</h2>
+            <p class="text-gray-500 text-sm mb-8">Please enter your master credentials</p>
+            <input id="adminPass" type="password" placeholder="Master Password" class="input-field text-center mb-4">
+            <button id="loginBtn" class="w-full action-btn py-4 rounded-xl font-bold uppercase tracking-widest">Verify & Enter</button>
+            <p id="error" class="text-red-500 mt-4 hidden text-xs font-bold italic">Access Denied: Invalid Key</p>
         </div>
-        
-        <input id="adminPass" type="password" placeholder="••••••••" class="w-full bg-gray-900/50 p-4 rounded-xl mb-4 border border-gray-700 outline-none text-center text-xl tracking-widest text-blue-400">
-        
-        <button id="loginBtn" class="w-full bg-blue-600 hover:bg-blue-500 py-4 rounded-xl font-bold text-lg transition-all active:scale-95 shadow-lg shadow-blue-600/30">
-            Verify & Enter
-        </button>
-        
-        <p id="error" class="text-red-400 mt-5 text-sm font-medium hidden flex items-center justify-center gap-2">
-            <span class="w-2 h-2 bg-red-400 rounded-full animate-ping"></span>
-            Access Denied! Wrong Password.
-        </p>
     </div>
 
-    <div id="admin-panel" class="hidden w-full max-w-5xl p-6 md:p-10">
-        <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
-            <div>
-                <h1 class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 uppercase tracking-tighter">Inventory Manager</h1>
-                <p class="text-gray-500 font-medium">Manage your premium shop products</p>
+    <div id="admin-panel" class="hidden flex w-full">
+        <aside class="sidebar w-64 p-6 hidden lg:block">
+            <div class="mb-10 flex items-center gap-2">
+                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-xs font-black">M</div>
+                <span class="font-bold tracking-tighter italic">MY SHOP <span class="text-blue-500">MGR</span></span>
             </div>
-            <button onclick="location.reload()" class="bg-gray-800 hover:bg-red-600 text-white px-6 py-2 rounded-full font-bold transition-all border border-gray-700">Logout</button>
-        </div>
+            <nav class="space-y-2">
+                <a href="#" class="flex items-center gap-3 p-3 bg-blue-600/10 text-blue-400 rounded-xl font-bold text-sm"><i class="fa fa-grid-2"></i> Dashboard</a>
+                <a href="#" class="flex items-center gap-3 p-3 text-gray-500 hover:bg-white/5 rounded-xl transition text-sm"><i class="fa fa-list"></i> Service List</a>
+                <a href="#" class="flex items-center gap-3 p-3 text-gray-500 hover:bg-white/5 rounded-xl transition text-sm"><i class="fa fa-bullhorn"></i> Announcements</a>
+            </nav>
+            <button onclick="location.reload()" class="mt-auto flex items-center gap-3 p-3 text-red-500 hover:bg-red-500/5 rounded-xl w-full text-left text-sm font-bold">
+                <i class="fa fa-sign-out"></i> Logout
+            </button>
+        </aside>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-1">
-                <div class="glass p-8 rounded-3xl sticky top-10">
-                    <h2 class="text-xl mb-6 font-bold text-blue-400 flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
-                        </svg>
-                        Add Product
-                    </h2>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="text-xs text-gray-500 uppercase font-bold ml-1">Name</label>
-                            <input id="pName" type="text" placeholder="e.g. Rolex Submariner" class="w-full bg-gray-900 p-3 rounded-xl border border-gray-700 text-white outline-none">
-                        </div>
-                        <div>
-                            <label class="text-xs text-gray-500 uppercase font-bold ml-1">Price (৳)</label>
-                            <input id="pPrice" type="number" placeholder="5000" class="w-full bg-gray-900 p-3 rounded-xl border border-gray-700 text-white outline-none">
-                        </div>
-                        <div>
-                            <label class="text-xs text-gray-500 uppercase font-bold ml-1">Image URL</label>
-                            <input id="pImage" type="text" placeholder="https://..." class="w-full bg-gray-900 p-3 rounded-xl border border-gray-700 text-white outline-none">
-                        </div>
-                        <button id="addItemBtn" class="w-full bg-emerald-600 hover:bg-emerald-500 py-4 rounded-xl font-bold transition-all shadow-lg shadow-emerald-600/20 mt-4">Save Product</button>
-                    </div>
+        <main class="flex-1 p-6 md:p-10 overflow-y-auto">
+            <div class="flex justify-between items-center mb-10">
+                <div>
+                    <h1 class="text-3xl font-black">Control Center</h1>
+                    <p class="text-gray-500 text-sm">Manage your SMM business operations here.</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span class="text-xs font-bold text-green-500 bg-green-500/10 px-3 py-1 rounded-full uppercase">System Live</span>
                 </div>
             </div>
 
-            <div class="lg:col-span-2">
-                <h2 class="text-xl mb-6 font-bold text-gray-300">Live Products</h2>
-                <div id="admin-product-list" class="grid gap-4">
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-10">
+                <section class="glass-panel p-8">
+                    <h3 class="text-lg font-bold mb-6 flex items-center gap-2"><i class="fa fa-plus-circle text-blue-500"></i> New Service</h3>
+                    <div class="space-y-4">
+                        <input id="pName" placeholder="Service Name (e.g. YouTube Views)" class="input-field">
+                        <div class="grid grid-cols-2 gap-4">
+                            <input id="pMin" type="number" placeholder="Min Qty" class="input-field">
+                            <input id="pMax" type="number" placeholder="Max Qty" class="input-field">
+                        </div>
+                        <input id="pPrice" type="number" placeholder="Price (৳) Per 1000" class="input-field">
+                        <textarea id="pDesc" placeholder="Service Description/Quality info..." class="input-field h-32"></textarea>
+                        <button id="addService" class="w-full action-btn py-4 rounded-xl font-bold uppercase">Add to Market</button>
                     </div>
+                    
+                    <div id="service-list" class="mt-10 space-y-3 max-h-60 overflow-y-auto pr-2">
+                        </div>
+                </section>
+
+                <section class="space-y-10">
+                    <div class="glass-panel p-8 border-l-4 border-yellow-500">
+                        <h3 class="text-lg font-bold mb-6 flex items-center gap-2"><i class="fa fa-bolt text-yellow-500"></i> Broadcast Info</h3>
+                        <select id="dataType" class="input-field mb-4">
+                            <option value="notice">Site Notice (Text)</option>
+                            <option value="payment">Payment Gateway (Label)</option>
+                        </select>
+                        <input id="dataTitle" placeholder="Label or Heading" class="input-field">
+                        <textarea id="dataDesc" placeholder="Full text (if notice)" class="input-field h-24"></textarea>
+                        <button id="addData" class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-4 rounded-xl font-bold uppercase transition">Publish Update</button>
+                        
+                        <div id="data-list" class="mt-8 space-y-2"></div>
+                    </div>
+
+                    <div class="glass-panel p-8 text-center border-dashed border-2 border-white/10">
+                        <p class="text-gray-500 text-xs">More features coming soon...</p>
+                    </div>
+                </section>
             </div>
-        </div>
+        </main>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, onSnapshot, updateDoc, deleteDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+        // [Firestore Config remains the same as before]
         const firebaseConfig = {
             apiKey: "AIzaSyBntmghsgXmWa_dCP9-T59Q_6qt8pbxJRI",
             authDomain: "my-premium-shop.firebaseapp.com",
@@ -98,91 +117,72 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Login Logic
+        // UI Transition & Logic
         document.getElementById('loginBtn').onclick = async () => {
-            const inputPass = document.getElementById('adminPass').value;
-            const btn = document.getElementById('loginBtn');
-            btn.innerText = "Checking...";
-            btn.disabled = true;
-
-            try {
-                const passRef = doc(db, "settings", "admin_config");
-                const passSnap = await getDoc(passRef);
-
-                if (passSnap.exists() && inputPass === passSnap.data().password) {
-                    document.getElementById('login-box').classList.add('hidden');
-                    document.getElementById('admin-panel').classList.remove('hidden');
-                    document.body.style.alignItems = "start";
-                    loadProducts();
-                } else {
-                    document.getElementById('error').classList.remove('hidden');
-                    btn.innerText = "Verify & Enter";
-                    btn.disabled = false;
-                }
-            } catch (err) {
-                alert("Check your Firebase Rules! Set them to 'true'.");
-                btn.innerText = "Verify & Enter";
-                btn.disabled = false;
+            const pass = document.getElementById('adminPass').value;
+            const snap = await getDoc(doc(db, "settings", "admin_config"));
+            if (snap.exists() && pass === snap.data().password) {
+                document.getElementById('login-box').classList.add('hidden');
+                document.getElementById('admin-panel').classList.remove('hidden');
+                loadData();
+            } else {
+                document.getElementById('error').classList.remove('hidden');
             }
         };
 
-        function loadProducts() {
-            onSnapshot(collection(db, "products"), (snapshot) => {
-                const list = document.getElementById('admin-product-list');
+        function loadData() {
+            onSnapshot(collection(db, "products"), snap => {
+                const list = document.getElementById('service-list');
                 list.innerHTML = "";
-                snapshot.forEach((snapshotDoc) => {
-                    const item = snapshotDoc.data();
-                    const id = snapshotDoc.id;
+                snap.forEach(d => {
                     list.innerHTML += `
-                        <div class="glass p-5 rounded-2xl flex items-center justify-between border-l-4 border-blue-500 group hover:bg-white/5 transition-all">
-                            <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 rounded-lg bg-gray-800 overflow-hidden">
-                                    <img src="${item.image || 'https://via.placeholder.com/150'}" class="w-full h-full object-cover">
-                                </div>
-                                <div>
-                                    <p class="font-bold text-white text-lg">${item.name}</p>
-                                    <p class="text-blue-400 font-mono italic">৳${item.price}</p>
-                                </div>
+                        <div class="bg-white/5 p-4 rounded-xl flex justify-between items-center border border-white/5 hover:border-blue-500/30 transition">
+                            <div>
+                                <p class="font-bold text-sm">${d.data().name}</p>
+                                <p class="text-[10px] text-blue-400">৳${d.data().price} per 1000</p>
                             </div>
-                            <div class="flex items-center gap-3">
-                                <input id="price-${id}" type="number" placeholder="New" class="bg-gray-900 text-sm p-2 w-24 rounded-lg border border-gray-700 outline-none">
-                                <button onclick="window.updatePrice('${id}')" class="bg-blue-600/20 hover:bg-blue-600 text-blue-400 hover:text-white px-4 py-2 rounded-lg text-xs font-bold transition-all">Update</button>
-                                <button onclick="window.deleteItem('${id}')" class="bg-red-500/10 hover:bg-red-600 text-red-500 hover:text-white p-2 rounded-lg transition-all">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
-                                    </svg>
-                                </button>
-                            </div>
+                            <button onclick="window.del('${d.id}', 'products')" class="text-red-500/50 hover:text-red-500 p-2"><i class="fa fa-trash-can"></i></button>
+                        </div>`;
+                });
+            });
+
+            onSnapshot(collection(db, "offers"), snap => {
+                const list = document.getElementById('data-list');
+                list.innerHTML = "";
+                snap.forEach(d => {
+                    list.innerHTML += `
+                        <div class="bg-black/20 p-3 rounded-lg flex justify-between items-center text-[10px] uppercase font-bold tracking-widest">
+                            <span class="${d.data().type === 'payment' ? 'text-green-500' : 'text-yellow-500'}">${d.data().title}</span>
+                            <button onclick="window.del('${d.id}', 'offers')" class="text-gray-600 hover:text-red-500">REMOVE</button>
                         </div>`;
                 });
             });
         }
 
-        window.updatePrice = async (id) => {
-            const newPrice = document.getElementById(`price-${id}`).value;
-            if(newPrice) {
-                await updateDoc(doc(db, "products", id), { price: Number(newPrice) });
-                alert("Price updated!");
-            }
-        };
+        window.del = async (id, col) => { if(confirm("Confirm removal?")) await deleteDoc(doc(db, col, id)); };
 
-        window.deleteItem = async (id) => {
-            if(confirm("Confirm Delete?")) await deleteDoc(doc(db, "products", id));
-        };
-
-        document.getElementById('addItemBtn').onclick = async () => {
+        document.getElementById('addService').onclick = async () => {
             const name = document.getElementById('pName').value;
-            const price = document.getElementById('pPrice').value;
-            const image = document.getElementById('pImage').value;
-            if(name && price) {
-                await addDoc(collection(db, "products"), { name, price: Number(price), image });
-                document.getElementById('pName').value = '';
-                document.getElementById('pPrice').value = '';
-                document.getElementById('pImage').value = '';
-                alert("Success! Product Added.");
-            } else {
-                alert("Fill all fields!");
-            }
+            if(!name) return alert("Service name required");
+            await addDoc(collection(db, "products"), {
+                name: name,
+                min: document.getElementById('pMin').value,
+                max: document.getElementById('pMax').value,
+                price: Number(document.getElementById('pPrice').value),
+                desc: document.getElementById('pDesc').value
+            });
+            alert("Service Deployed!");
+        };
+
+        document.getElementById('addData').onclick = async () => {
+            const title = document.getElementById('dataTitle').value;
+            if(!title) return alert("Title required");
+            await addDoc(collection(db, "offers"), {
+                type: document.getElementById('dataType').value,
+                title: title,
+                description: document.getElementById('dataDesc').value
+            });
+            alert("Broadcasted Successfully!");
         };
     </script>
 </body>
